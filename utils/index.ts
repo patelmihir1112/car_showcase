@@ -3,7 +3,7 @@ import { CarProps, FilterProps } from "@/types";
 export const generateCarImageUrl = (car: CarProps, angle?: string) => {
   const url = new URL("https://cdn.imagin.studio/getimage");
   const { make, model, year } = car;
-  url.searchParams.append('customer', "hrjavascript-mastery");
+  url.searchParams.append('customer', process.env.NEXT_PUBLIC_IMAGIN_API_KEY || "");
   url.searchParams.append('make', make);
   url.searchParams.append('modelFamily', model.split(" ")[0]);
   url.searchParams.append('zoomType', 'fullscreen');
@@ -55,7 +55,7 @@ export const calculateCarRent = (city_mpg: number, year: number) => {
 export async function fetchCars(filter: FilterProps) {
   const { manufacturer, fuel, limit, model, year } = filter
   const headers = {
-    'X-RapidAPI-Key': 'f523cbc0c1msh629873cc9a60321p1fb310jsnc5048afdefa2',
+    'X-RapidAPI-Key':  process.env.NEXT_PUBLIC_RAPID_API_KEY || "",
     'X-RapidAPI-Host': 'cars-by-api-ninjas.p.rapidapi.com'
   };
 
